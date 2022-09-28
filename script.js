@@ -1,38 +1,43 @@
 let shop = document.querySelector("#shop");
 let shopItemsData = [{
-    id: "1",
+    id: "item_1",
     name: "Casual Shirt",
     price: 100,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum",
     img: "images/img1.jpg"
 },
 {
-    id: "2",
+    id: "item_2",
     name: "T Shirt",
     price: 45,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum",
     img: "images/img2.jpg"
 },
 {
-    id: "3",
+    id: "item_3",
     name: "Suit",
     price: 255,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum",
     img: "images/img3.jpg"
 },
 {
-    id: "4",
+    id: "item_4",
     name: "Casual Jeans",
     price: 45,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum",
     img: "images/img4.jpg"
 }];
+// let basket = JSON.parse(localStorage.getItem("data")) || [];
 let basket = [];
+// console.log(basket);
 
 let generateShop = () => {
-    return (shop.innerHTML = shopItemsData.map((x) => {
-        let { id, name, price, desc, img } = x;
-        return `<div id=product-id-${id} class="item">
+    return (shop.innerHTML = shopItemsData
+        .map((x) => {
+            let { id, name, price, desc, img } = x;
+            ///console.log(search);
+            console.log(`${id}`);
+            return `<div id="product-id-${id}" class="item">
         <img src="${img}" alt="picture" width="220">
         <div class="details">
             <h3>${name}</h3>
@@ -41,46 +46,45 @@ let generateShop = () => {
                 <h2>${price}</h2>
                 <div class="button">
                     <i onclick="decrement(${id})" class="bi bi-dash-lg"></i>
-                    <div id=${id} class="quantity">0</div>
+                    <div id=${id} class="quantity">
+                        ${0}
+                    </div>
                     <i onclick="increment(${id})" class="bi bi-plus-lg"></i>
                 </div>
             </div>
         </div>
     </div> `
-    }).join(""));
+        }).join(""));
 }
 generateShop();
+console.log(basket);
 
 let increment = (id) => {
-    let search = basket.find((x) => x.id === id);
+    let selectedItem = id;
+    // console.log(selectedItem.id);
+    let search = basket.find((x) => x.id === selectedItem.id);
     if (search === undefined) {
         basket.push({
-            id: id,
+            id: selectedItem.id,
             item: 1,
-        });
+        })
     }
     else {
         search.item++;
     }
-    update(id);
-    calculation();
-    // console.log(basket);
+
+    console.log(basket);
 }
 let decrement = (id) => {
-    let search = basket.find((x) => x.id === id);
-    if (!(search === undefined)) {
-        if (search.item === 0) {
-            return;
-        }
-        else {
-            search.item--;
-        }
-
-
+    let selectedItem = id;
+    // console.log(selectedItem.id);
+    let search = basket.find((x) => x.id === selectedItem.id);
+    if (search === undefined) {
+        return;
     }
-    update(id);
-    calculation();
-    // console.log(basket);
+    else {
+        search.item--;
+    }
 }
 let update = (id) => {
     let search = basket.find((x) => x.id === id);
@@ -88,12 +92,12 @@ let update = (id) => {
     // console.log(document.getElementById(search.id));
 }
 
-let calculation = () =>{
+let calculation = () => {
     let total = 0;
     let cartAmount = document.getElementById('cartAmount');
     basket.forEach(element => {
         total += element.item;
     });
-    console.log(`Total amount = ${total}`);
+    // console.log(`Total amount = ${total}`);
     cartAmount.innerHTML = total;
 }
