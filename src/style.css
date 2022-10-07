@@ -106,3 +106,31 @@ body{
 /**
 * ? Item Design ends
 */
+a{
+    text-decoration: none;
+    color: white;
+}
+
+/**
+* ! Style Rules for label and Some buttons
+ **/
+
+ .text-center{
+    text-align: center;
+    margin-bottom: 20px;
+ }
+ .homeBtn{
+    font-size: 1.1em;
+    background-color: lightblue;
+    color: darkblue;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+ }
+
+ .bi-x-lg{
+    color: red;
+    font-weight: bold;
+ }
